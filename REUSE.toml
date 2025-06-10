@@ -1,0 +1,27 @@
+
+
+version = 1
+
+[[annotations]]
+path = ["Makefile", "go.*", ".gitignore"]
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "CC0-1.0"
+
+
+[[annotations]]
+path = [
+    "README.md",
+    "cmd/unionfees-server/assets/*.png",
+    "cmd/unionfees-server/assets/*.ico",
+    "cmd/unionfees-server/templates/*.*",
+    "docs/*.*",
+    "testdata/*.*"
+]
+SPDX-FileCopyrightText = "2025 Peter Magnusosn <me@kmpm.se>"
+SPDX-License-Identifier = "MIT"
+
+
+[[annotations]]
+path = "cmd/unionfees-server/assets/pico.min.css"
+SPDX-FileCopyrightText = "2019-2024 Pico"
+SPDX-License-Identifier = "MIT"

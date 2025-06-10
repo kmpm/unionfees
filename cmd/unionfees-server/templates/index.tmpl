@@ -1,0 +1,34 @@
+<!--
+SPDX-FileCopyrightText: 2025 Peter Magnusson <me@kmpm.se>
+
+SPDX-License-Identifier: MIT
+-->
+
+<!doctype html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <title>{{.title}}</title>
+    <link rel="stylesheet" href="/public/assets/pico.min.css" />
+</head>
+<body>
+<main class="container">
+<h1>{{.title}}</h1>
+
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <!-- Name: <input type="text" name="name"><br>
+    Email: <input type="email" name="email"><br> -->
+    Förbund: <select name="union">
+        <option value="38">IF-Metall</option>
+        <option value="43">GS-facket</option>
+        </select><br>
+    Utbetalningsdatum: <input type="date" name="period"><br>
+    PDF-Fil: <input type="file" name="file"><br><br>
+    <input type="submit" value="Skicka">
+</form>
+<br>
+<p>{{.version}}</p>
+</main>
+</body>
