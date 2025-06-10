@@ -45,3 +45,8 @@ $(OUTDIR):
 	mkdir $@
 
 
+.PHONY: no-dirty
+no-dirty:
+	@echo "Checking git status..."
+	@git diff --quiet || (echo "Git working directory is not clean" && exit 1)
+	@git diff --cached --quiet || (echo "Git index is not clean" && exit 1)
