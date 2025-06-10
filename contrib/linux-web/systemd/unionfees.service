@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2025 Peter Magnusosn <me@kmpm.se>
+#
+# SPDX-License-Identifier: CC0-1.0
+[Unit]
+Description=UnionFeesnionfees server
+Requires=unionfees.socket
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+Type=simple
+Restart=always
+RestartSec=5
+WorkingDirectory=/opt/unionfees
+ExecStart=/usr/local/bin/unionfees-server
+
+[Install]
+WantedBy=multi-user.target
