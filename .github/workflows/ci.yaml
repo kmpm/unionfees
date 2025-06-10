@@ -31,7 +31,7 @@ jobs:
         run: go mod download
 
       - name: Run make checks
-        run: make tidy audit no-dirty
+        run: make checks
       
     #   - name: Log in to GHCR
     #     uses: docker/login-action@v3
