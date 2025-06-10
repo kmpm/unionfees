@@ -1,0 +1,8 @@
+*.pdf
+out/
+.private/
+arkiv/
+var/
+.vscode/
+# Added by goreleaser init:
+dist/
