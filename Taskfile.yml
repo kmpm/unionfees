@@ -1,0 +1,39 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  OUTDIR: ./out
+  GIT_VERSION:
+    sh: git describe --tags --always --long --dirty
+  LDFLAGS: -w -s -X 'main.version={{.GIT_VERSION}}'
+
+tasks:
+  tidy:
+    desc: "tidy and fmt"
+    cmds:
+      - "go mod tidy"
+      - "go fmt ./..."
+
+  audit:
+    desc: "running code checks"
+    cmds:
+      - go mod verify
+      - go vet ./...
+      - go run honnef.co/go/tools/cmd/staticcheck@latest -checks=all,-ST1000,-U1000 ./...
+      - go run golang.org/x/vuln/cmd/govulncheck@latest ./...
+
+
+  licenses:
+    desc: "generate 3rd party licenses"
+    cmds:
+      - mkdir -p {{ .OUTDIR }}
+      - go run github.com/google/go-licenses@latest report ./... --template contrib/licensing-template.tpl > {{ .OUTDIR }}/licenses.json
+      - reuse lint
+
+
+  build:
+    desc: "build the project"
+    cmds:
+      - mkdir -p {{ .OUTDIR }}
+      - go build -v -ldflags {{ .LDFLAGS }} -o {{ .OUTDIR }}/ ./cmd/...

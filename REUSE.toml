@@ -3,7 +3,7 @@
 version = 1
 
 [[annotations]]
-path = ["Makefile", "go.*", ".gitignore"]
+path = ["Makefile", "go.*", ".gitignore", "Taskfile.yml", "contrib/licensing-template.tpl"]
 SPDX-FileCopyrightText = "NONE"
 SPDX-License-Identifier = "CC0-1.0"
 
