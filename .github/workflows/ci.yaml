@@ -44,6 +44,9 @@ jobs:
       - name: REUSE Compliance Check
         uses: fsfe/reuse-action@v4
       
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
