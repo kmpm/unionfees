@@ -17,10 +17,10 @@ Som referens se diskussion på vismas forum https://forum.spiris.se/t5/Fragor-om
 
 
 ## Build
-Installera go>= 1.24 och gnu-make
+Installera go>= 1.24 och task från https://taskfile.dev
 
 ```shell
-make
+task 
 
 ```
 
