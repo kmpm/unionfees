@@ -6,7 +6,7 @@ vars:
   OUTDIR: ./out
   GIT_VERSION:
     sh: git describe --tags --always --long --dirty
-  LDFLAGS: -w -s -X 'main.version={{.GIT_VERSION}}'
+  LDFLAGS: -w -s -X 'main.appVersion={{.GIT_VERSION}}'
 
 tasks:
   default:
