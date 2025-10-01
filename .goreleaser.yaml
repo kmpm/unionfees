@@ -6,6 +6,8 @@
 
 version: 2
 
+project_name: unionfees
+
 before:
   hooks:
     # You may remove this if you don't use go modules.
@@ -21,7 +23,6 @@ builds:
     goos:
       - linux
       - windows
-      - darwin
     goarch:
       - amd64
       - arm64
@@ -33,7 +34,6 @@ builds:
     goos:
       - linux
       - windows
-      - darwin
     goarch:
       - amd64
       - arm64
@@ -60,6 +60,7 @@ changelog:
     exclude:
       - "^docs:"
       - "^test:"
+      - "^chore:"
 
 release:
   footer: >-
@@ -67,3 +68,33 @@ release:
     ---
 
     Released by [GoReleaser](https://github.com/goreleaser/goreleaser).
+
+# SBOMs for the archives. requires syft
+# sboms:
+#   - artifacts: archive
+
+
+
+dockers_v2:
+  - # Build the server docker image
+    id: unionfees
+    dockerfile: contrib/docker/Dockerfile.goreleaser
+    ids:
+      - unionfees-server
+    images:
+      - "ghcr.io/kmpm/unionfees"
+    tags:
+      - "v{{ .Version }}"
+      - "v{{ .Major }}.{{ .Minor }}"
+      - "{{ if .IsNightly }}nightly{{ end }}"
+      - "{{ if not .IsNightly }}latest{{ end }}"
+    labels:
+      "org.opencontainers.image.description": "Unionfees-Server"
+      "org.opencontainers.image.created": "{{.Date}}"
+      "org.opencontainers.image.name": "{{.ProjectName}}"
+      "org.opencontainers.image.revision": "{{.FullCommit}}"
+      "org.opencontainers.image.version": "{{.Version}}"
+      "org.opencontainers.image.source": "{{.GitURL}}"
+    platforms:
+      - linux/amd64
+      
