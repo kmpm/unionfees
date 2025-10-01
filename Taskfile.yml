@@ -6,7 +6,7 @@ vars:
   OUTDIR: ./out
   GIT_VERSION:
     sh: git describe --tags --always --long --dirty
-  LDFLAGS: -w -s -X 'main.version={{.GIT_VERSION}}'
+  LDFLAGS: -w -s -X 'main.appVersion={{.GIT_VERSION}}'
 
 tasks:
   default:
@@ -48,12 +48,21 @@ tasks:
       - git diff --quiet || (echo "Git working directory is not clean" && exit 1)
       - git diff --cached --quiet || (echo "Git index is not clean" && exit 1)
 
+  checks:
+    desc: "run checks"
+    deps: [  tidy, audit, no-dirty ]
+    
+
   build:
     desc: "build the project"
     deps: [ outdir ]
     cmds:
       - go build -v -ldflags "{{ .LDFLAGS }}" -o {{ .OUTDIR }}/ ./cmd/...
 
-  checks:
-    desc: "run checks"
-    deps: [  tidy, audit, no-dirty ]
+  
+  container:
+    desc: "build container image"
+    cmds:
+      - docker build -t unionfees:latest -f contrib/docker/Dockerfile --build-arg VERSION={{ .GIT_VERSION }} .
+      # - docker tag unionfees:latest ghcr.io/kmpm/unionfees:latest
+      # - docker push ghcr.io/kmpm/unionfees:latest

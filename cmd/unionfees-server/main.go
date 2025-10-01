@@ -36,10 +36,10 @@ func main() {
 	var address string
 	var verbosity, mode, sessionKey, socketPath string
 	var fd int
-	flag.StringVar(&address, "address", "127.0.0.1:8080", "port to listen on")
+	flag.StringVar(&address, "address", "127.0.0.1:8080", "host:port to listen on (env ADDRESS)")
 	flag.StringVar(&verbosity, "verbosity", "info", "verbosity level")
 	flag.StringVar(&mode, "mode", "release", "mode to run in")
-	flag.StringVar(&sessionKey, "session", defaultSessionKey, "session key (SESSION_KEY)")
+	flag.StringVar(&sessionKey, "session", defaultSessionKey, "session key (env SESSION_KEY)")
 	flag.StringVar(&socketPath, "socket", "", "unix socket path")
 
 	flag.Parse()
@@ -48,6 +48,13 @@ func main() {
 		e := os.Getenv("SESSION_KEY")
 		if e != "" {
 			sessionKey = e
+		}
+	}
+
+	if !isFlagPassed("address") {
+		e := os.Getenv("ADDRESS")
+		if e != "" {
+			address = e
 		}
 	}
 
