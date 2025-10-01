@@ -18,6 +18,8 @@ builds:
   - id: unionfees-cli
     main: ./cmd/unionfees-cli/
     binary: unionfees-cli
+    ldflags:
+      - -s -w -X main.appVersion={{.Version}}
     env:
       - CGO_ENABLED=0
     goos:
@@ -26,9 +28,12 @@ builds:
     goarch:
       - amd64
       - arm64
+
   - id: unionfees-server
     main: ./cmd/unionfees-server/
     binary: unionfees-server
+    ldflags:
+      - -s -w -X main.appVersion={{.Version}}
     env:
       - CGO_ENABLED=0
     goos:
