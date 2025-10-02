@@ -34,13 +34,21 @@ tasks:
       - go run honnef.co/go/tools/cmd/staticcheck@latest -checks=all,-ST1000,-U1000 ./...
       - go run golang.org/x/vuln/cmd/govulncheck@latest ./...
 
-
-  licenses:
-    desc: "generate 3rd party licenses"
+  go-licenses:
+    desc: "install go-licenses"
     deps: [ outdir ]
     cmds:
       - go run github.com/google/go-licenses@latest report ./... --template contrib/licensing-template.tpl > {{ .OUTDIR }}/licenses.json
+      - go run github.com/google/go-licenses@latest check ./... 
+
+  reuse:
+    desc: "check licenses with REUSE"
+    cmds:
       - reuse lint
+
+  licenses:
+    desc: "check licenses"
+    deps: [ go-licenses, reuse ]
 
   no-dirty:
     desc: "check for uncommitted changes"
