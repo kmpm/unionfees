@@ -66,3 +66,9 @@ tasks:
       - docker build -t unionfees:latest -f contrib/docker/Dockerfile --build-arg VERSION={{ .GIT_VERSION }} .
       # - docker tag unionfees:latest ghcr.io/kmpm/unionfees:latest
       # - docker push ghcr.io/kmpm/unionfees:latest
+
+  pre-commit:
+    desc: "run pre-commit hooks"
+    deps: [ tidy, audit, licenses]
+    cmds:
+      - goreleaser release --snapshot --skip=publish --clean
