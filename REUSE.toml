@@ -12,14 +12,16 @@ SPDX-License-Identifier = "CC0-1.0"
 [[annotations]]
 path = [
     "README.md",
+    "DEVELOP.md",
+    "docs/*.*",
     "cmd/unionfees-server/assets/*.png",
     "cmd/unionfees-server/assets/*.ico",
     "cmd/unionfees-server/templates/*.*",
-    "docs/*.*",
-    "testdata/*.*"
+    "testdata/*.*",
 ]
 SPDX-FileCopyrightText = "2025 Peter Magnusosn <me@kmpm.se>"
 SPDX-License-Identifier = "MIT"
+
 
 
 [[annotations]]
